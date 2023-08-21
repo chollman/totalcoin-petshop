@@ -8,17 +8,12 @@ export const navbarLinks = [
   },
   {
     id: 2,
-    title: 'Proximos lanzamientos',
-    url: '/proximamente',
+    title: 'Registro',
+    url: '/register',
   },
   {
     id: 3,
-    title: 'Calendario',
-    url: '/calendario',
-  },
-  {
-    id: 4,
-    title: 'Nosotros',
-    url: '/contacto',
+    title: 'Login',
+    url: '/login',
   },
 ]
