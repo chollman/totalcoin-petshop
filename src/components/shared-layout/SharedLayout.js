@@ -1,11 +1,11 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { Navbar } from '../../components'
+import { NavbarTop } from '../../components'
 
 const SharedLayout = (props) => {
   return (
     <div>
-      <Navbar />
+      <NavbarTop />
       <Outlet />
     </div>
   )

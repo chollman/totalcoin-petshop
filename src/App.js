@@ -1,5 +1,5 @@
-import './App.css';
-import SharedLayout from './components/shared-layout/SharedLayout';
+import './App.scss'
+import { SharedLayout } from './components'
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <h1>Autoservicio Veterinaria</h1>
       <SharedLayout />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
