@@ -1,0 +1,9 @@
+@import '~bootstrap/scss/bootstrap';
+
+@import './styles/variables.scss';
+
+.#{$css-namespace} {
+  .App {
+    text-align: center;
+  }
+}
