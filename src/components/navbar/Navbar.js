@@ -14,7 +14,11 @@ const NavbarTop = () => {
     <Container className='navbar-wrapper'>
       <Row>
         <Col>
-          <Navbar collapseOnSelect expand='lg'>
+          <Navbar
+            className='justify-content-between'
+            collapseOnSelect
+            expand='lg'
+          >
             <Navbar.Brand href='#home'>TOTALCOIN</Navbar.Brand>
             <Navbar.Toggle className='cambiame'></Navbar.Toggle>
             <Navbar.Collapse>
