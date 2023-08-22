@@ -4,6 +4,7 @@ import App from './App'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Error404 from './pages/error/404'
 import Home from './pages/home/Home'
+import Login from './pages/login/Login'
 
 const router = createBrowserRouter([
   {
@@ -17,11 +18,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/register',
-        element: <div>REGISTRO</div>,
+        element: <Login />,
       },
       {
         path: '/login',
-        element: <div>LOGIN</div>,
+        element: <Login />,
       },
     ],
   },

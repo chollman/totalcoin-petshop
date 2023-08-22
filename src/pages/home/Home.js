@@ -1,6 +1,6 @@
 import { MdOutlinePets } from 'react-icons/md'
 
-function Home() {
+const Home = () => {
   return (
     <div>
       <p>Por favor, registrate o iniciá sesión para poder usar la App.</p>
