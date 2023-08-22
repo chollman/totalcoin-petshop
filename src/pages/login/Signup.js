@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-import { login } from '../../store/users/usersSlice'
+import { addUser } from '../../store/users/usersSlice'
 
 const SignUp = () => {
   const dispatch = useDispatch()
@@ -19,17 +19,17 @@ const SignUp = () => {
     return <Navigate to='/' replace />
   }
 
+  const isNewUser = () => {
+    const found = usersList.find((user) => user.name === nombre)
+    return !found
+  }
+
   const onFormSubmit = (e) => {
     e.preventDefault()
-    if (nombre && contrasena) {
-      const foundUser = usersList.find(
-        (user) => user.name === nombre && user.password === contrasena,
-      )
-      if (foundUser) {
-        dispatch(login(foundUser))
-      } else {
-        alert('Usuario o contraseña incorrectos')
-      }
+    if (nombre && contrasena && isNewUser()) {
+      dispatch(addUser({ name: nombre, password: contrasena }))
+    } else {
+      alert('Ya existe un usuario con ese nombre')
     }
   }
 

@@ -1,6 +1,5 @@
 import './App.scss'
 import { SharedLayout } from './components'
-import { MdOutlinePets } from 'react-icons/md'
 
 function App() {
   return (
