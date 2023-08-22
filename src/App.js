@@ -7,9 +7,6 @@ function App() {
     <div className='App'>
       <h1>Autoservicio Veterinaria</h1>
       <SharedLayout />
-      <div className='home-icon'>
-        <MdOutlinePets />
-      </div>
     </div>
   )
 }

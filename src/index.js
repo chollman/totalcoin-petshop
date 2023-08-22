@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Error404 from './pages/error/404'
+import Home from './pages/home/Home'
 
 const router = createBrowserRouter([
   {
@@ -11,8 +12,16 @@ const router = createBrowserRouter([
     errorElement: <Error404 />,
     children: [
       {
-        path: '/contactos',
-        element: <div>HOLA</div>,
+        path: '/',
+        element: <Home />,
+      },
+      {
+        path: '/register',
+        element: <div>REGISTRO</div>,
+      },
+      {
+        path: '/login',
+        element: <div>LOGIN</div>,
       },
     ],
   },
