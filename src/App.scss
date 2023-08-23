@@ -21,4 +21,12 @@ body {
     margin-top: -200px;
     font-size: 500px;
   }
+
+  .section {
+    background-color: $bg-primary;
+    margin: 1em auto;
+    @include content-box();
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
 }

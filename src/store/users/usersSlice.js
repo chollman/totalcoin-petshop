@@ -8,9 +8,20 @@ const initialState = {
       password: '1234',
       role: 'vendedor',
     },
+    {
+      id: 2,
+      name: 'Chris',
+      password: '1234',
+      role: 'cliente',
+    },
   ],
-  lastId: 1,
-  loggedUser: undefined,
+  lastId: 2,
+  loggedUser: {
+    id: 2,
+    name: 'Chris',
+    password: '1234',
+    role: 'cliente',
+  },
 }
 
 export const usersSlice = createSlice({
