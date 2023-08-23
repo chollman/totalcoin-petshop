@@ -7,6 +7,7 @@ const initialState = {
       name: 'Max',
       weight: 25,
       age: 5,
+      race: 'Perro',
       castrated: true,
       ownerId: 1,
     },
@@ -15,6 +16,7 @@ const initialState = {
       name: 'Rusi',
       weight: 10,
       age: 3,
+      race: 'Gato',
       castrated: true,
       ownerId: 2,
     },
@@ -23,6 +25,7 @@ const initialState = {
       name: 'Gonzi',
       weight: 5,
       age: 13,
+      race: 'Perro',
       castrated: false,
       ownerId: 2,
     },
@@ -34,12 +37,17 @@ export const petsSlice = createSlice({
   name: 'pet',
   initialState,
   reducers: {
+    addPet: (state, action) => {
+      action.payload.id = state.lastId + 1
+      state.list.push(action.payload)
+      state.lastId += 1
+    },
     removePet: (state, action) => {
       state.list = state.list.filter((pet) => pet.id !== action.payload)
     },
   },
 })
 
-export const { removePet } = petsSlice.actions
+export const { addPet, removePet } = petsSlice.actions
 
 export default petsSlice.reducer

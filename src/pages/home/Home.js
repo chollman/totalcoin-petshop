@@ -1,11 +1,15 @@
 import { MdOutlinePets } from 'react-icons/md'
+import { FaPlus } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import { removePet } from '../../store/pets/petsSlice'
+import { addPet, removePet } from '../../store/pets/petsSlice'
+import './home.scss'
+import { useState } from 'react'
+import Form from 'react-bootstrap/Form'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -13,9 +17,45 @@ const Home = () => {
   const petsByUser = useSelector((state) => state.pets.list).filter(
     (pet) => pet.ownerId === loggedUser?.id,
   )
+  const [petName, setPetName] = useState('')
+  const [petAge, setPetAge] = useState('')
+  const [petWeight, setPetWeight] = useState('')
+  const [petRace, setPetRace] = useState('Perro')
+  const [petCastrated, setPetCastrated] = useState(false)
+  const [toggleShowPetForm, setToggleShowPetForm] = useState(false)
 
   const handleDeletePet = (petId) => {
     dispatch(removePet(petId))
+  }
+
+  const handleAddPet = () => {
+    setToggleShowPetForm(!toggleShowPetForm)
+  }
+
+  const onSwitchPetCastratedAction = () => {
+    setPetCastrated(!petCastrated)
+  }
+
+  const onFormSubmit = (e) => {
+    e.preventDefault()
+    if (petName && petAge && petWeight && petRace) {
+      dispatch(
+        addPet({
+          name: petName,
+          age: petAge,
+          weight: petWeight,
+          race: petRace,
+          castrated: petCastrated,
+          ownerId: loggedUser?.id,
+        }),
+      )
+      setPetName('')
+      setPetAge('')
+      setPetWeight('')
+      setPetRace('Perro')
+      setPetCastrated(false)
+      setToggleShowPetForm(!toggleShowPetForm)
+    }
   }
 
   if (loggedUser) {
@@ -53,24 +93,17 @@ const Home = () => {
             </Col>
           </Row>
 
-          {petsByUser.length > 0 && (
-            <Row>
-              <Col>
-                <h3 className='mt-4'>Mis mascotas</h3>
+          <Row>
+            <Col>
+              <h3 className='mt-4'>Mis mascotas</h3>
+              <div className='pets-wrapper'>
                 {petsByUser.map((pet) => (
-                  <Card
-                    key={pet.id}
-                    data-bs-theme='dark'
-                    style={{
-                      width: '18rem',
-                      display: 'inline-block',
-                      margin: '8px',
-                    }}
-                  >
+                  <Card key={pet.id} data-bs-theme='dark' className='pet-card'>
                     <Card.Body>
                       <Card.Title>{pet.name}</Card.Title>
                       <Card.Text>
                         Edad: {pet.age} <br />
+                        Raza: {pet.race} <br />
                         Peso: {pet.weight} <br />
                         Castrado/a: {pet.castrated ? 'Sí' : 'No'} <br />
                       </Card.Text>
@@ -88,9 +121,102 @@ const Home = () => {
                     </Card.Body>
                   </Card>
                 ))}
-              </Col>
-            </Row>
-          )}
+                {!toggleShowPetForm && (
+                  <Card
+                    data-bs-theme='dark'
+                    className='pet-card add-card'
+                    onClick={handleAddPet}
+                  >
+                    <Card.Body>
+                      <Card.Text className='card-icon'>
+                        <FaPlus />
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                )}
+
+                {toggleShowPetForm && (
+                  <Card data-bs-theme='dark' className='pet-card'>
+                    <Card.Body>
+                      <form onSubmit={onFormSubmit}>
+                        <div className='mb-1'>
+                          <input
+                            type='text'
+                            className='form-control'
+                            id='pet-name'
+                            value={petName}
+                            onChange={(e) => setPetName(e.target.value)}
+                            placeholder='Nombre'
+                          />
+                        </div>
+                        <div className='mb-1'>
+                          <input
+                            type='number'
+                            className='form-control'
+                            id='pet-age'
+                            value={petAge}
+                            onChange={(e) => setPetAge(e.target.value)}
+                            placeholder='Edad'
+                          />
+                        </div>
+                        <div className='mb-1'>
+                          <input
+                            type='number'
+                            className='form-control'
+                            id='pet-weight'
+                            value={petWeight}
+                            onChange={(e) => setPetWeight(e.target.value)}
+                            placeholder='Peso'
+                          />
+                        </div>
+                        <div className='mb-1'>
+                          <Form.Check
+                            inline
+                            label='Perro'
+                            name='group1'
+                            type='radio'
+                            id={`inline-radio-1`}
+                            value='Perro'
+                            checked={petRace === 'Perro'}
+                            onChange={(e) => setPetRace(e.target.value)}
+                          />
+                          <Form.Check
+                            inline
+                            label='Gato'
+                            name='group1'
+                            type='radio'
+                            id={`inline-radio-2`}
+                            value='Gato'
+                            checked={petRace === 'Gato'}
+                            onChange={(e) => setPetRace(e.target.value)}
+                          />
+                        </div>
+                        <div className='mb-1'>
+                          <Form.Check
+                            type='switch'
+                            id='pet-castrated'
+                            label='Castrado/a'
+                            onChange={onSwitchPetCastratedAction}
+                          />
+                        </div>
+                        <div className='gap-2 d-grid'>
+                          <Button type='submit' variant='info'>
+                            Registrar mascota
+                          </Button>
+                        </div>
+                      </form>
+                    </Card.Body>
+                  </Card>
+                )}
+              </div>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
+              <h3 className='mt-4'>Mis pedidos</h3>
+            </Col>
+          </Row>
         </Container>
       )
     }
