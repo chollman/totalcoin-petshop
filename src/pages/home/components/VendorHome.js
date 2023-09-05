@@ -48,6 +48,7 @@ const VendorHome = ({
         </Col>
       </Row>
 
+      {/* MUESTRO LA LISTA DE ORDENES */}
       {toggleShowOrders && (
         <Row>
           <Col>
@@ -68,6 +69,7 @@ const VendorHome = ({
         </Row>
       )}
 
+      {/* MUESTRO LA LISTA DE USUARIOS Y PERMITO CAMBIAR SU ROL */}
       {toggleShowUsers && (
         <Row>
           <Col>
@@ -103,6 +105,7 @@ const VendorHome = ({
         </Row>
       )}
 
+      {/* MUESTRO LA LISTA DE MASCOTAS CON SUS DUENIOS */}
       {toggleShowPetsAndOwners && (
         <Row>
           <Col>
