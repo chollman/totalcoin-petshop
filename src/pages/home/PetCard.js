@@ -2,7 +2,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
-const PetCard = ({ pet, handleDeletePet }) => {
+const PetCard = ({ pet, handlePedirCombo, handleDeletePet }) => {
   return (
     <Card data-bs-theme='dark' className='pet-card'>
       <Card.Body>
@@ -14,7 +14,7 @@ const PetCard = ({ pet, handleDeletePet }) => {
           Castrado/a: {pet.castrated ? 'Sí' : 'No'} <br />
         </Card.Text>
         <div className='gap-2 d-grid'>
-          <Button onClick={() => {}} variant='info'>
+          <Button onClick={() => handlePedirCombo(pet)} variant='info'>
             Pedir Combo
           </Button>
           <Button onClick={() => handleDeletePet(pet.id)} variant='danger'>

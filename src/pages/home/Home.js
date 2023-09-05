@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { addPet, removePet } from '../../store/pets/petsSlice'
+import { addOrder } from '../../store/orders/ordersSlice'
 import './home.scss'
 import { useState } from 'react'
 import CustomerHome from './CustomerHome'
@@ -21,6 +22,15 @@ const Home = () => {
   const [petRace, setPetRace] = useState('Perro')
   const [petCastrated, setPetCastrated] = useState(false)
   const [toggleShowPetForm, setToggleShowPetForm] = useState(false)
+
+  const handlePedirCombo = (pet) => {
+    dispatch(
+      addOrder({
+        pet: pet,
+        user: loggedUser,
+      }),
+    )
+  }
 
   const handleDeletePet = (petId) => {
     dispatch(removePet(petId))
@@ -67,6 +77,7 @@ const Home = () => {
           loggedUser={loggedUser}
           petsByUser={petsByUser}
           handleAddPet={handleAddPet}
+          handlePedirCombo={handlePedirCombo}
           handleDeletePet={handleDeletePet}
           onSwitchPetCastratedAction={onSwitchPetCastratedAction}
           onPetFormSubmit={onPetFormSubmit}

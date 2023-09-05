@@ -12,6 +12,7 @@ const CustomerHome = ({
   loggedUser,
   petsByUser,
   handleAddPet,
+  handlePedirCombo,
   handleDeletePet,
   onSwitchPetCastratedAction,
   onPetFormSubmit,
@@ -46,6 +47,7 @@ const CustomerHome = ({
               <PetCard
                 key={pet.id}
                 pet={pet}
+                handlePedirCombo={handlePedirCombo}
                 handleDeletePet={handleDeletePet}
               />
             ))}
