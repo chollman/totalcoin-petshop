@@ -14,7 +14,11 @@ body {
 }
 
 .#{$css-namespace} {
+  h1 {
+    text-align: center;
+  }
   .home-icon {
+    text-align: center;
     margin-top: -200px;
     font-size: 500px;
   }
