@@ -4,12 +4,17 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import PetCard from './PetCard'
+import Card from 'react-bootstrap/Card'
 
-const VendorHome = ({ loggedUser, allPets, allUsers }) => {
+const VendorHome = ({ loggedUser, allPets, allUsers, handleChangeRol }) => {
   const [toggleShowPetsAndOwners, setToggleShowPetsAndOwners] = useState(false)
+  const [toggleShowUsers, setToggleShowUsers] = useState(false)
 
   const handleShowPetsAndOwners = () => {
     setToggleShowPetsAndOwners(!toggleShowPetsAndOwners)
+  }
+  const handleShowUsers = () => {
+    setToggleShowUsers(!toggleShowUsers)
   }
 
   return (
@@ -19,13 +24,51 @@ const VendorHome = ({ loggedUser, allPets, allUsers }) => {
           <h1>Logueado como {loggedUser.role}</h1>
           <div className='gap-2 d-grid'>
             <Button variant='info'>Ver pedidos</Button>
-            <Button variant='info'>Ver vendedores</Button>
+            <Button variant='info' onClick={handleShowUsers}>
+              Ver vendedores
+            </Button>
             <Button variant='info' onClick={handleShowPetsAndOwners}>
               Ver listado de mascotas y dueños
             </Button>
           </div>
         </Col>
       </Row>
+
+      {toggleShowUsers && (
+        <Row>
+          <Col>
+            <h3>Usuarios y vendedores</h3>
+            <Row className='vendor-customer-list'>
+              {allUsers.map((user) => (
+                <React.Fragment key={user.id}>
+                  {loggedUser?.id !== user.id && (
+                    <Col md={6}>
+                      <Card data-bs-theme='dark'>
+                        <Card.Body>
+                          <div>Nombre: {user.name}</div>
+                          <div>Rol: {user.role}</div>
+                          <Col
+                            md={{ span: 6, offset: 6 }}
+                            className='gap-2 d-grid'
+                          >
+                            <Button
+                              onClick={() => handleChangeRol(user.id)}
+                              variant='info'
+                            >
+                              Cambiar Rol
+                            </Button>
+                          </Col>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  )}
+                </React.Fragment>
+              ))}
+            </Row>
+          </Col>
+        </Row>
+      )}
+
       {toggleShowPetsAndOwners && (
         <Row>
           <Col>

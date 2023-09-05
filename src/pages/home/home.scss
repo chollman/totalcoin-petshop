@@ -11,6 +11,11 @@
     margin: 5px;
     float: left;
   }
+  .vendor-customer-list {
+    & > div {
+      margin-bottom: 10px;
+    }
+  }
   .vendor-pets-list {
     .pet-card {
       min-height: 12rem;

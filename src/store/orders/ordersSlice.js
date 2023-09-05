@@ -19,7 +19,7 @@ const initialState = {
       amount: 10,
       complement1: 3,
       complement2: 1,
-      petId: 2,
+      petId: 1,
       customerId: 1,
     },
   ],

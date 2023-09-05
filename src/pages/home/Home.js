@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { addPet, removePet } from '../../store/pets/petsSlice'
 import { addOrder } from '../../store/orders/ordersSlice'
+import { changeRol } from '../../store/users/usersSlice'
 import './home.scss'
 import { useState } from 'react'
 import CustomerHome from './CustomerHome'
@@ -71,6 +72,10 @@ const Home = () => {
     }
   }
 
+  const handleChangeRol = (id) => {
+    dispatch(changeRol(id))
+  }
+
   if (loggedUser) {
     if (loggedUser.role === 'vendedor') {
       // SI EL USUARIO LOGUEADO TIENE ROL DE VENDEDOR MUESTRO LAS OPCIONES QUE TIENE DICHO ROL
@@ -79,6 +84,7 @@ const Home = () => {
           loggedUser={loggedUser}
           allPets={allPets}
           allUsers={allUsers}
+          handleChangeRol={handleChangeRol}
         />
       )
     } else {

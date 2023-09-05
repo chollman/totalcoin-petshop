@@ -41,9 +41,20 @@ export const usersSlice = createSlice({
     logout: (state) => {
       state.loggedUser = undefined
     },
+    changeRol: (state, action) => {
+      state.list = state.list.map((user) => {
+        if (user.id === action.payload) {
+          user.role === 'vendedor'
+            ? (user.role = 'cliente')
+            : (user.role = 'vendedor')
+        }
+        return user
+      })
+    },
   },
 })
 
-export const { addUser, removeUser, login, logout } = usersSlice.actions
+export const { addUser, removeUser, login, logout, changeRol } =
+  usersSlice.actions
 
 export default usersSlice.reducer
