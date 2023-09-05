@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { FaPlus } from 'react-icons/fa'
-import PetCard from '../../components/pet-card/PetCard'
+import PetCard from './PetCard'
 
 const CustomerHome = ({
   loggedUser,
