@@ -3,11 +3,11 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+
 import { FaPlus } from 'react-icons/fa'
 import { AiFillCheckSquare } from 'react-icons/ai'
 import PetCard from './PetCard'
+import NewPetFormCard from './NewPetFormCard'
 
 const CustomerHome = ({
   loggedUser,
@@ -40,6 +40,7 @@ const CustomerHome = ({
         <Col>
           <h3 className='mt-4'>Mis mascotas</h3>
           <div className='pets-wrapper'>
+            {/* MUESTRO LA LISTA DE MASCOTAS PARA EL USUARIO LOGUEADO */}
             {petsByUser.map((pet) => (
               <PetCard
                 key={pet.id}
@@ -49,6 +50,7 @@ const CustomerHome = ({
               />
             ))}
 
+            {/* AGREGO UN BOTON PARA PODER REGISTRAR NUEVAS MASCOTAS */}
             {!toggleShowPetForm && (
               <Card
                 data-bs-theme='dark'
@@ -64,77 +66,18 @@ const CustomerHome = ({
             )}
 
             {toggleShowPetForm && (
-              <Card data-bs-theme='dark' className='pet-card'>
-                <Card.Body>
-                  <form onSubmit={onPetFormSubmit}>
-                    <div className='mb-1'>
-                      <input
-                        type='text'
-                        className='form-control'
-                        id='pet-name'
-                        value={petName}
-                        onChange={(e) => setPetName(e.target.value)}
-                        placeholder='Nombre'
-                      />
-                    </div>
-                    <div className='mb-1'>
-                      <input
-                        type='number'
-                        className='form-control'
-                        id='pet-age'
-                        value={petAge}
-                        onChange={(e) => setPetAge(e.target.value)}
-                        placeholder='Edad'
-                      />
-                    </div>
-                    <div className='mb-1'>
-                      <input
-                        type='number'
-                        className='form-control'
-                        id='pet-weight'
-                        value={petWeight}
-                        onChange={(e) => setPetWeight(e.target.value)}
-                        placeholder='Peso'
-                      />
-                    </div>
-                    <div className='mb-1'>
-                      <Form.Check
-                        inline
-                        label='Perro'
-                        name='group1'
-                        type='radio'
-                        id={`inline-radio-1`}
-                        value='Perro'
-                        checked={petRace === 'Perro'}
-                        onChange={(e) => setPetRace(e.target.value)}
-                      />
-                      <Form.Check
-                        inline
-                        label='Gato'
-                        name='group1'
-                        type='radio'
-                        id={`inline-radio-2`}
-                        value='Gato'
-                        checked={petRace === 'Gato'}
-                        onChange={(e) => setPetRace(e.target.value)}
-                      />
-                    </div>
-                    <div className='mb-1'>
-                      <Form.Check
-                        type='switch'
-                        id='pet-castrated'
-                        label='Castrado/a'
-                        onChange={onSwitchPetCastratedAction}
-                      />
-                    </div>
-                    <div className='gap-2 d-grid'>
-                      <Button type='submit' variant='info'>
-                        Registrar mascota
-                      </Button>
-                    </div>
-                  </form>
-                </Card.Body>
-              </Card>
+              <NewPetFormCard
+                onPetFormSubmit={onPetFormSubmit}
+                petName={petName}
+                petAge={petAge}
+                petWeight={petWeight}
+                petRace={petRace}
+                setPetName={setPetName}
+                setPetAge={setPetAge}
+                setPetWeight={setPetWeight}
+                setPetRace={setPetRace}
+                onSwitchPetCastratedAction={onSwitchPetCastratedAction}
+              />
             )}
           </div>
         </Col>
