@@ -5,9 +5,9 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 
 import { FaPlus } from 'react-icons/fa'
-import { AiFillCheckSquare } from 'react-icons/ai'
 import PetCard from './PetCard'
 import NewPetFormCard from './NewPetFormCard'
+import OrderItem from './OrderItem'
 
 const CustomerHome = ({
   loggedUser,
@@ -83,37 +83,20 @@ const CustomerHome = ({
         </Col>
       </Row>
 
+      {/* MUESTRO LA LISTA DE PEDIDOS SI HAY GENERADOS POR EL CLIENTE LOGUEADO  */}
       {ordersByUser?.length > 0 && (
         <Row>
           <Col>
             <h3 className='mt-4'>Mis pedidos</h3>
             <div className='orders-list'>
-              {ordersByUser.map((order, index) => {
-                const pet = petsByUser.find((pet) => order.petId === pet.id)
-                if (!pet) {
-                  return
-                }
-                return (
-                  <div className='order' key={order.id}>
-                    <div>{index + 1}.</div>
-                    <div>{order.date}</div>
-                    <div>
-                      Combo para {pet?.race}: {pet?.name} de {order.amount} kg
-                      de comida y {order.complement1 + order.complement2}{' '}
-                      complementos dietarios
-                    </div>
-                    <div
-                      className={
-                        order.delivered
-                          ? 'order-status delivered'
-                          : 'order-status'
-                      }
-                    >
-                      <AiFillCheckSquare />
-                    </div>
-                  </div>
-                )
-              })}
+              {ordersByUser.map((order, index) => (
+                <OrderItem
+                  key={order.id}
+                  petsByUser={petsByUser}
+                  order={order}
+                  index={index}
+                />
+              ))}
             </div>
           </Col>
         </Row>
