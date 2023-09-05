@@ -147,13 +147,16 @@ const CustomerHome = ({
             <div className='orders-list'>
               {ordersByUser.map((order, index) => {
                 const pet = petsByUser.find((pet) => order.petId === pet.id)
+                if (!pet) {
+                  return
+                }
                 return (
                   <div className='order' key={order.id}>
                     <div>{index + 1}.</div>
                     <div>{order.date}</div>
                     <div>
-                      Combo para {pet.race}: {pet.name} de {order.amount} kg de
-                      comida y {order.complement1 + order.complement2}{' '}
+                      Combo para {pet?.race}: {pet?.name} de {order.amount} kg
+                      de comida y {order.complement1 + order.complement2}{' '}
                       complementos dietarios
                     </div>
                     <div

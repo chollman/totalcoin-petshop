@@ -8,8 +8,8 @@ import { addOrder, completeDelivery } from '../../store/orders/ordersSlice'
 import { changeRol } from '../../store/users/usersSlice'
 import './home.scss'
 import { useState } from 'react'
-import CustomerHome from './CustomerHome'
-import VendorHome from './VendorHome'
+import CustomerHome from './components/CustomerHome'
+import VendorHome from './components/VendorHome'
 
 const Home = () => {
   const dispatch = useDispatch()
