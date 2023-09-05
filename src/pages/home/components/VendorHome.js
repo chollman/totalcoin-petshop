@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import PetCard from './PetCard'
 import Card from 'react-bootstrap/Card'
-import { AiFillCheckSquare } from 'react-icons/ai'
+import OrderItem from './OrderItem'
 
 const VendorHome = ({
   loggedUser,
@@ -53,34 +53,16 @@ const VendorHome = ({
           <Col>
             <h3>Ordenes generadas</h3>
             <Row className='vendors-orders-list orders-list'>
-              {allOrders.map((order, index) => {
-                const pet = allPets.find((pet) => order.petId === pet.id)
-                const customer = allUsers.find(
-                  (user) => order.customerId === user.id,
-                )
-                return (
-                  <div className='order' key={order.id}>
-                    <div>{index + 1}.</div>
-                    <div>{order.date}</div>
-                    <div>
-                      Combo para {pet.race}: {pet.name} de {order.amount} kg de
-                      comida y {order.complement1 + order.complement2}{' '}
-                      complementos dietarios
-                    </div>
-                    <div>Cliente: {customer.name}</div>
-                    <div
-                      className={
-                        order.delivered
-                          ? 'order-status delivered'
-                          : 'order-status'
-                      }
-                      onClick={() => handleDeliveryClicked(order.id)}
-                    >
-                      <AiFillCheckSquare />
-                    </div>
-                  </div>
-                )
-              })}
+              {allOrders.map((order, index) => (
+                <OrderItem
+                  key={order.id}
+                  pets={allPets}
+                  users={allUsers}
+                  order={order}
+                  index={index}
+                  handleDeliveryClicked={handleDeliveryClicked}
+                />
+              ))}
             </Row>
           </Col>
         </Row>

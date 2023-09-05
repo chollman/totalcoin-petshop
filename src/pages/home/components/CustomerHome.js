@@ -92,7 +92,7 @@ const CustomerHome = ({
               {ordersByUser.map((order, index) => (
                 <OrderItem
                   key={order.id}
-                  petsByUser={petsByUser}
+                  pets={petsByUser}
                   order={order}
                   index={index}
                 />
