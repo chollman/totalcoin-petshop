@@ -6,11 +6,13 @@ import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { FaPlus } from 'react-icons/fa'
+import { AiFillCheckSquare } from 'react-icons/ai'
 import PetCard from './PetCard'
 
 const CustomerHome = ({
   loggedUser,
   petsByUser,
+  ordersByUser,
   handleAddPet,
   handlePedirCombo,
   handleDeletePet,
@@ -26,16 +28,12 @@ const CustomerHome = ({
   setPetWeight,
   setPetRace,
 }) => {
+  console.log(ordersByUser)
   return (
     <Container className='section'>
       <Row className='justify-content-md-center'>
         <Col md={{ span: 6 }}>
-          <h3>Logueado como {loggedUser.role}</h3>
-          <div className='gap-2 d-grid'>
-            <Button variant='info'>Registrar mascota</Button>
-            <Button variant='info'>Hacer pedido de combos</Button>
-            <Button variant='info'>Ver histórico de pedidos</Button>
-          </div>
+          <h1>Logueado como {loggedUser.role}</h1>
         </Col>
       </Row>
 
@@ -143,11 +141,38 @@ const CustomerHome = ({
         </Col>
       </Row>
 
-      <Row>
-        <Col>
-          <h3 className='mt-4'>Mis pedidos</h3>
-        </Col>
-      </Row>
+      {ordersByUser?.length > 0 && (
+        <Row>
+          <Col>
+            <h3 className='mt-4'>Mis pedidos</h3>
+            <div className='my-orders-list'>
+              {ordersByUser.map((order, index) => {
+                const pet = petsByUser.find((pet) => order.petId === pet.id)
+                return (
+                  <div className='order' key={order.id}>
+                    <div>{index + 1}.</div>
+                    <div>{order.date}</div>
+                    <div>
+                      Combo para {pet.race}: {pet.name} de {order.amount} kg de
+                      comida y {order.complement1 + order.complement2}{' '}
+                      complementos dietarios
+                    </div>
+                    <div
+                      className={
+                        order.delivered
+                          ? 'order-status delivered'
+                          : 'order-status'
+                      }
+                    >
+                      <AiFillCheckSquare />
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </Col>
+        </Row>
+      )}
     </Container>
   )
 }

@@ -16,6 +16,9 @@ const Home = () => {
   const petsByUser = useSelector((state) => state.pets.list).filter(
     (pet) => pet.ownerId === loggedUser?.id,
   )
+  const ordersByUser = useSelector((state) => state.orders.list).filter(
+    (order) => order.customerId === loggedUser?.id,
+  )
   const [petName, setPetName] = useState('')
   const [petAge, setPetAge] = useState('')
   const [petWeight, setPetWeight] = useState('')
@@ -76,6 +79,7 @@ const Home = () => {
         <CustomerHome
           loggedUser={loggedUser}
           petsByUser={petsByUser}
+          ordersByUser={ordersByUser}
           handleAddPet={handleAddPet}
           handlePedirCombo={handlePedirCombo}
           handleDeletePet={handleDeletePet}

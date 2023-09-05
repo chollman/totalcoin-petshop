@@ -20,4 +20,16 @@
   .card-icon {
     font-size: 40px;
   }
+  .my-orders-list {
+    .order {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .order-status {
+    color: red;
+    &.delivered {
+      color: green;
+    }
+  }
 }
