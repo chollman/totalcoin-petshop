@@ -2,6 +2,7 @@
 
 .#{$css-namespace} {
   h3 {
+    margin-top: 15px;
     text-align: center;
   }
   .pet-card {
@@ -9,6 +10,11 @@
     min-height: 17rem;
     margin: 5px;
     float: left;
+  }
+  .vendor-pets-list {
+    .pet-card {
+      min-height: 12rem;
+    }
   }
   .add-card {
     display: flex;

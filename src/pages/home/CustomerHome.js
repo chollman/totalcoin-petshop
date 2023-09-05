@@ -28,7 +28,6 @@ const CustomerHome = ({
   setPetWeight,
   setPetRace,
 }) => {
-  console.log(ordersByUser)
   return (
     <Container className='section'>
       <Row className='justify-content-md-center'>

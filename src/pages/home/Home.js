@@ -12,7 +12,9 @@ import VendorHome from './VendorHome'
 
 const Home = () => {
   const dispatch = useDispatch()
+  const allUsers = useSelector((state) => state.users.list)
   const loggedUser = useSelector((state) => state.users.loggedUser)
+  const allPets = useSelector((state) => state.pets.list)
   const petsByUser = useSelector((state) => state.pets.list).filter(
     (pet) => pet.ownerId === loggedUser?.id,
   )
@@ -72,7 +74,13 @@ const Home = () => {
   if (loggedUser) {
     if (loggedUser.role === 'vendedor') {
       // SI EL USUARIO LOGUEADO TIENE ROL DE VENDEDOR MUESTRO LAS OPCIONES QUE TIENE DICHO ROL
-      return <VendorHome loggedUser={loggedUser} />
+      return (
+        <VendorHome
+          loggedUser={loggedUser}
+          allPets={allPets}
+          allUsers={allUsers}
+        />
+      )
     } else {
       // SINO, MUESTRO LAS OPCIONES QUE TIENE EL CLIENTE, CON SUS MASCOTAS
       return (

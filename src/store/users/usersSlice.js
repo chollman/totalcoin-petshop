@@ -17,10 +17,10 @@ const initialState = {
   ],
   lastId: 2,
   loggedUser: {
-    id: 2,
-    name: 'Chris',
+    id: 1,
+    name: 'Claudio',
     password: '1234',
-    role: 'cliente',
+    role: 'vendedor',
   },
 }
 
