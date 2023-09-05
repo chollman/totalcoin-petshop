@@ -75,12 +75,17 @@ export const ordersSlice = createSlice({
       state.list.push(order)
       state.lastId += 1
     },
-    removeOrder: (state, action) => {
-      state.list = state.list.filter((pet) => pet.id !== action.payload)
+    completeDelivery: (state, action) => {
+      state.list = state.list.map((order) => {
+        if (order.id === action.payload) {
+          order.delivered = true
+        }
+        return order
+      })
     },
   },
 })
 
-export const { addOrder, removeOrder } = ordersSlice.actions
+export const { addOrder, completeDelivery } = ordersSlice.actions
 
 export default ordersSlice.reducer

@@ -144,7 +144,7 @@ const CustomerHome = ({
         <Row>
           <Col>
             <h3 className='mt-4'>Mis pedidos</h3>
-            <div className='my-orders-list'>
+            <div className='orders-list'>
               {ordersByUser.map((order, index) => {
                 const pet = petsByUser.find((pet) => order.petId === pet.id)
                 return (

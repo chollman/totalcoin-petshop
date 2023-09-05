@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { addPet, removePet } from '../../store/pets/petsSlice'
-import { addOrder } from '../../store/orders/ordersSlice'
+import { addOrder, completeDelivery } from '../../store/orders/ordersSlice'
 import { changeRol } from '../../store/users/usersSlice'
 import './home.scss'
 import { useState } from 'react'
@@ -19,6 +19,7 @@ const Home = () => {
   const petsByUser = useSelector((state) => state.pets.list).filter(
     (pet) => pet.ownerId === loggedUser?.id,
   )
+  const allOrders = useSelector((state) => state.orders.list)
   const ordersByUser = useSelector((state) => state.orders.list).filter(
     (order) => order.customerId === loggedUser?.id,
   )
@@ -76,6 +77,10 @@ const Home = () => {
     dispatch(changeRol(id))
   }
 
+  const handleDeliveryClicked = (id) => {
+    dispatch(completeDelivery(id))
+  }
+
   if (loggedUser) {
     if (loggedUser.role === 'vendedor') {
       // SI EL USUARIO LOGUEADO TIENE ROL DE VENDEDOR MUESTRO LAS OPCIONES QUE TIENE DICHO ROL
@@ -84,7 +89,9 @@ const Home = () => {
           loggedUser={loggedUser}
           allPets={allPets}
           allUsers={allUsers}
+          allOrders={allOrders}
           handleChangeRol={handleChangeRol}
+          handleDeliveryClicked={handleDeliveryClicked}
         />
       )
     } else {

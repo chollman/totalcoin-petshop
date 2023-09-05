@@ -31,16 +31,24 @@
   .card-icon {
     font-size: 40px;
   }
-  .my-orders-list {
+  .orders-list {
     .order {
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
   }
   .order-status {
     color: red;
+    font-size: 24px;
+    margin-top: -8px;
     &.delivered {
       color: green;
+    }
+  }
+  .vendors-orders-list {
+    .order-status {
+      cursor: pointer;
     }
   }
 }

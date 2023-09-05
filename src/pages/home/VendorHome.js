@@ -5,16 +5,28 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import PetCard from './PetCard'
 import Card from 'react-bootstrap/Card'
+import { AiFillCheckSquare } from 'react-icons/ai'
 
-const VendorHome = ({ loggedUser, allPets, allUsers, handleChangeRol }) => {
+const VendorHome = ({
+  loggedUser,
+  allPets,
+  allUsers,
+  allOrders,
+  handleChangeRol,
+  handleDeliveryClicked,
+}) => {
   const [toggleShowPetsAndOwners, setToggleShowPetsAndOwners] = useState(false)
   const [toggleShowUsers, setToggleShowUsers] = useState(false)
+  const [toggleShowOrders, setToggleShowOrders] = useState(true)
 
   const handleShowPetsAndOwners = () => {
     setToggleShowPetsAndOwners(!toggleShowPetsAndOwners)
   }
   const handleShowUsers = () => {
     setToggleShowUsers(!toggleShowUsers)
+  }
+  const handleShowOrders = () => {
+    setToggleShowOrders(!toggleShowOrders)
   }
 
   return (
@@ -23,7 +35,9 @@ const VendorHome = ({ loggedUser, allPets, allUsers, handleChangeRol }) => {
         <Col md={{ span: 6 }}>
           <h1>Logueado como {loggedUser.role}</h1>
           <div className='gap-2 d-grid'>
-            <Button variant='info'>Ver pedidos</Button>
+            <Button variant='info' onClick={handleShowOrders}>
+              Ver pedidos
+            </Button>
             <Button variant='info' onClick={handleShowUsers}>
               Ver vendedores
             </Button>
@@ -33,6 +47,44 @@ const VendorHome = ({ loggedUser, allPets, allUsers, handleChangeRol }) => {
           </div>
         </Col>
       </Row>
+
+      {toggleShowOrders && (
+        <Row>
+          <Col>
+            <h3>Ordenes generadas</h3>
+            <Row className='vendors-orders-list orders-list'>
+              {allOrders.map((order, index) => {
+                const pet = allPets.find((pet) => order.petId === pet.id)
+                const customer = allUsers.find(
+                  (user) => order.customerId === user.id,
+                )
+                return (
+                  <div className='order' key={order.id}>
+                    <div>{index + 1}.</div>
+                    <div>{order.date}</div>
+                    <div>
+                      Combo para {pet.race}: {pet.name} de {order.amount} kg de
+                      comida y {order.complement1 + order.complement2}{' '}
+                      complementos dietarios
+                    </div>
+                    <div>Cliente: {customer.name}</div>
+                    <div
+                      className={
+                        order.delivered
+                          ? 'order-status delivered'
+                          : 'order-status'
+                      }
+                      onClick={() => handleDeliveryClicked(order.id)}
+                    >
+                      <AiFillCheckSquare />
+                    </div>
+                  </div>
+                )
+              })}
+            </Row>
+          </Col>
+        </Row>
+      )}
 
       {toggleShowUsers && (
         <Row>
